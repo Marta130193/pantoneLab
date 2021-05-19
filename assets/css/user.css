@@ -1,0 +1,41 @@
+.cajaUser {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 335px;
+  height: 40px;
+  background-color: black;
+  border-radius: 30px;
+  border: 1px solid white;
+}
+
+.cajaUser .cajaimagenUser {
+  width: 37px;
+  height: 40px;
+  position: absolute;
+  background-color: #fafafa;
+  border: 1px solid white;
+  border-radius: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: right;
+      -ms-flex-align: right;
+          align-items: right;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+}
+
+.cajaUser .cajaimagenUser .avatar {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+}
+
+.cajaUser .cajaimagenUser .user {
+  color: white;
+  font-size: 16px;
+  margin: 5px;
+}
+/*# sourceMappingURL=user.css.map */

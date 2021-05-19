@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="no-js" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="theme-color" content="#fafafa" />
+
+    <title>pantoneLab</title>
+
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
+    <script src="./assets/app/main.js"></script>
+</head>
+
+<body>
+
+    <!--FONDO-->
+    <img class="fondo" src="assets/img/fondo.jpg">
+
+    <!--GRID-->
+    <div class="grid">
+        <!-- LOGO PARTE SUPERIOR IZQUIERDA
+        <div class="cajaLogo">
+            <div class="logo">
+            </div>
+        </div> -->
+
+
+
+        <!--PALETA DE COLORES-->
+        <div class="cajaPaleta">
+            <img class="paleta" src="assets/img/paleta.png">
+            <div class="color">
+
+                <div id="amarillo" class="yes-drop drag-drop amarillo"></div>
+                <div id="azul" class="yes-drop drag-drop azul"></div>
+                <div id="rojo" class="yes-drop drag-drop rojo"></div>
+
+            </div>
+        </div>
+
+        <!--EL PANTONE-->
+        <div class="cajaPantone">
+            <div class="rectanguloBlanco">
+                <div class="dropzone cajaDestinoVerde">
+                </div>
+            </div>
+        </div>
+
+
+        <!--IMAGEN DE USUARIO-->
+        <div class="cajaUser">
+            <div class="cajaimagenUser">
+                <div class="imagenUser">
+                    <img class="avatar" src="assets/img/art.png">
+                </div>
+            </div>
+            <div class="user">
+                Marta130193
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+
+    <script type="module">
+        /**
+         * drag and drog
+         */
+        /* The dragging code for '.draggable' from the demo above
+         * applies to this demo as well so it doesn't have to be repeated. */
+        import interact from 'https://cdn.interactjs.io/v1.10.8/interactjs/index.js';
+        // enable draggables to be dropped into this
+        interact('.dropzone').dropzone({
+            // only accept elements matching this CSS selector
+            accept: '.yes-drop',
+            // Require a 75% element overlap for a drop to be possible
+            overlap: 0.75,
+
+            // listen for drop related events:
+
+            ondropactivate: function (event) {
+                // add active dropzone feedback
+                event.target.classList.add('drop-active')
+            },
+            ondragenter: function (event) {
+                var draggableElement = event.relatedTarget
+                var dropzoneElement = event.target
+
+                // feedback the possibility of a drop
+                dropzoneElement.classList.add('drop-target')
+                draggableElement.classList.add('can-drop')
+            },
+            ondragleave: function (event) {
+                // remove the drop feedback style
+                event.target.classList.remove('drop-target');
+                event.relatedTarget.classList.remove('can-drop');
+            },
+            ondrop: function (event) {
+                var cajaAmarilla = document.getElementById("amarillo");
+                var cajaAzul = document.getElementById("azul");
+                var cajaRoja = document.getElementById("rojo");
+                var cajaVerde = document.getElementById("verde");
+                var cajaNaranja = document.getElementById("naranja");
+
+                var cajasDentroDelCajonPrincipal = 0;
+
+                var amarilloDentro = false;
+                if (cajaAmarilla.className.includes("can-drop")) {
+                    amarilloDentro = true;
+                    cajasDentroDelCajonPrincipal++;
+
+                }
+
+                var azulDentro = false;
+                if (cajaAzul.className.includes("can-drop")) {
+                    azulDentro = true;
+                    cajasDentroDelCajonPrincipal++;
+                }
+
+                var rojoDentro = false;
+                if (cajaRoja.className.includes("can-drop")) {
+                    rojoDentro = true;
+                    cajasDentroDelCajonPrincipal++;
+                }
+
+                if (amarilloDentro == true && azulDentro == true && rojoDentro == false) {
+                    alert("Correcto!!!!");
+                } else if (cajasDentroDelCajonPrincipal == 1) {
+                    alert("Tienes que añadir el último color!!");
+                } else {
+                    alert("Incorrecto!!!, Siga probando!");
+                    cajaAmarilla.style.webkitTransform =
+                        cajaAmarilla.style.transform =
+                        'translate( 0px, 0px)';
+
+                    cajaAzul.style.webkitTransform =
+                        cajaAzul.style.transform =
+                        'translate( 0px, 0px)';
+
+                    cajaRoja.style.webkitTransform =
+                        cajaRoja.style.transform =
+                        'translate( 0px, 0px)';
+                    cajaVerde.style.webkitTransform =
+                        cajaVerde.style.transform =
+                        'translate( 0px, 0px)';
+                    cajaNaranja.style.webkitTransform =
+                        cajaNaranja.style.transform =
+                        'translate( 0px, 0px)';
+                        amarilloDentro = false; 
+                        azulDentro = false; 
+                        rojoDentro = false; 
+                }
+            },
+            ondropdeactivate: function (event) {
+                // remove active dropzone feedback
+                event.target.classList.remove('drop-active')
+                event.target.classList.remove('drop-target')
+            }
+        })
+
+        function dragMoveListener(event) {
+            var target = event.target,
+                // keep the dragged position in the data-x/data-y attributes
+                x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+                y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+              
+                console.log(x);
+            
+            // translate the element
+            target.style.webkitTransform =
+                target.style.transform =
+                'translate(' + x + 'px, ' + y + 'px)';
+
+            // update the posiion attributes
+            target.setAttribute('data-x', x);
+            target.setAttribute('data-y', y);
+            
+        }
+
+        interact('.drag-drop')
+            .draggable({
+                inertia: true,
+                modifiers: [
+                    // interact.modifiers.restrictRect({
+                    //     restriction: 'parent',
+                    //     endOnly: true
+                    // })
+                ],
+                autoScroll: true,
+                // dragMoveListener from the dragging demo above
+                listeners: { move: dragMoveListener }
+            })
+
+    </script>
+
+</footer>
+
+</html>

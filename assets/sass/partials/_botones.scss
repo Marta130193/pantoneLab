@@ -1,0 +1,19 @@
+.cajaBotonStart {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+  
+  
+    .start {
+      font-size: 16pt;
+      color: white;
+      margin: 5px;
+      background-color: black;
+      border: 1px solid white;
+      width: 100px;
+      height: 40px;
+      border-radius: 40px;
+      text-decoration: none;
+    }
+  }
